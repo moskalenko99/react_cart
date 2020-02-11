@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+.container{
+  margin: 0 auto;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  
+}
+
+.minus, .plus{
+  font-size: 13px;
+  height: 13px;
+  padding: 6px;
+  border: 1px solid #bfbfbf;
+  cursor: pointer;
+}
+
+.buy {
+ display: flex;
+ flex-direction: column;
+ align-items: flex-end;
+}
+
+.btn-buy {
+  width: 100px;
+  height: 40px;
+  background-color: #d4d3cf;
+  color: #585855;
+  border: 1px solid #585855;
+  cursor: pointer;
+}
+
+.single-good {
+  position: relative;
+  border: 1px solid #bfbfbf;
+  margin-bottom:15px;
+  display: flex;
+  justify-content: stretch;
+}
+
+.single-good .remove-icon{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  color: #bfbfbf;
+}
+
+.single-good .calculation {
+  display: flex;
+  align-items: center;    
+}
+
+.single-good .count, .single-good .price {
+  display: flex;
+  margin: 20px;
+}
+
+.single-good .thumbnail {
+  flex-grow: 1;
+  display: block;
+  width: 128px;
+  height: 128px;
+}
+
+.single-good .count .count-product {
+  background: none;
+  border: none;
+  overflow: hidden;
+  width: 40px;    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.single-good .description {
+  color: #bfbfbf;
+}
+
+.single-good .title {
+  color: #424242;
+}
+
+.single-good .count {
+  color: #bfbfbf;
+}
+
+.buy .final-price{
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+@media screen and (max-width: 1075px) {
+  .container {
+      width: 600px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+      width: 500px;
+  }
+}
