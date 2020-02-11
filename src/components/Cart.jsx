@@ -15,29 +15,17 @@ class Cart extends React.Component{
         })
         sum = sum.toFixed(2);
         return sum;
-    }
-
-    renderCart = () => {
-        const { data } = this.props;
-        let productTemplate = null;
-
-        if(data.length){
-
-            productTemplate = data.map(function(item){
-                item.count = item.count || 1;
-                return <Product key={item.id}  data={item} />
-            })
-        }else{
-            productTemplate = <p>Корзина пуста</p>
-        }
-        
-        return productTemplate;
-    }
+    };
 
     render() {
+        const { data } = this.props;
         return(
             <div className="container">
-                {this.renderCart()}
+                {data.length > 0 ? data.map((item, index) => (
+                    <Product key={item.id}  data={item} index={index} counter={this.props.counters[index]} onCount={this.props.onCount}/>
+                )) : (
+                    <p>Корзина пуста</p>
+                )}
                 <div className="buy">
                     <div className="final-price"> {this.recalculateSum()} </div>
                     <button className="btn-buy">BUY</button>
