@@ -32,7 +32,7 @@ class Product extends React.Component{
         let price = (cost * counter).toFixed(2);
 
         return(
-            this.state.isValid ?(
+            this.state.isValid  && (
                 <div className="single-good">
                     <div className="thumbnail">
                         <img alt="img" src={image} />
@@ -51,7 +51,6 @@ class Product extends React.Component{
                     </div>
                     <i className="remove-icon far fa-trash-alt" onClick={this.handleRemove}></i>
                 </div>)
-            : " "
         )
     }
 }
