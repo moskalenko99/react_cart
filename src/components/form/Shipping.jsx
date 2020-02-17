@@ -1,85 +1,160 @@
-import React from 'react'
-import Input from './Input'
+import React from 'react';
+import FormGroup from './FormGroup';
 
-class Shipping extends React.Component{
+const emptyValidator = value => {
+  const valid = /[a-zA-Z]/.test(value);
+  return valid ? null : 'The value is required';
+};
 
+const emailValidator = email => {
+	const valid = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:+)\])$/.test(email);
+  return valid ? null : 'Email has incorrect format';
+};
+
+const addressValidator = address => {
+  const valid = /[a-zA-Z0-9_-]/.test(address);
+  return valid ? null : 'Address has incorrect format';
+};
+
+const phoneValidator = phone => {
+  const valid = /[0-9]/.test(phone);
+  return valid ? null : 'Phone has incorrect format';
+};
+
+
+class Shipping extends React.Component {
   state = {
-    errorForename: "",
-    errorAddress: "",
-    errorPhone: "",
-    errorEmail: "",
-  }
+		sum: 32,
+    inputs: [
+      {
+        id: '1',
+        cls: 'forename',
+        type: 'forename',
+        title: 'Name*',
+        classError: '',
+        validators: [emptyValidator],
+        error: null,
+      },
+      {
+        id: '2',
+        cls: 'address',
+        type: 'address',
+        title: 'Address*',
+        classError: '',
+        validators: [emptyValidator, addressValidator],
+        error: null,
+      },
+      {
+        id: '3',
+        cls: 'phone',
+        type: 'number',
+        title: 'Phone',
+        classError: '',
+        validators: [phoneValidator],
+        error: null,
+      },
+      {
+        id: '4',
+        cls: 'email',
+        type: 'email',
+        title: 'E-mail*',
+        classError: '',
+        validators: [emailValidator],
+        error: null,
+      },
+    ],
+  };
 
-  validForename = (e) => {
+  updateValue(input, value) {
+    let errorMessage = null;
+    
+    for (const i in input.validators) {
+			const result = input.validators[i](value.target.value );
       
-    const valid = /[a-zA-Z]/.test(e.target.value);
-
-      if(!valid){                        
-        this.setState({ errorForename: "error-forename" })
-      }else{
-        this.setState({ errorForename: "" })
+      if (result) {
+        errorMessage = result;
+        break;
       }
-  }
-
-  validAddress = (e) => {
-      
-    const valid = /[a-zA-Z0-9_-]/.test(e.target.value);
-
-      if(!valid){                        
-        this.setState({ errorAddress: "error-address" })
-      }else{
-        this.setState({ errorAddress: "" })
-      }
-  }
-
-  validPhone = (e) => {
-      
-    const valid = /[0-9]/.test(e.target.value);
-
-      if(!valid){                        
-        this.setState({ errorPhone: "error-phone" })
-      }else{
-        this.setState({ errorPhone: "" })
-      }
-  }
-
-
-  validEmail = (e) => {
-
-    const email = e.target.value;
-    const valid = ((email.indexOf(".") > 0) && (email.indexOf("@") > 0)) || /[^a-zA-Z0-9.@_-]/.test(email);
-
-      if(!valid){                        
-        this.setState({ errorEmail: "error-email" })
-      }else{
-        this.setState({ errorEmail: "" })
-      }
-  }
-
-    render() {
-        return(
-          <div className="form"> 
-            <form className="form-shipping" action="" method="post">
-              <Input class="forename" type="name" title="Name*" errorName="Некорректное имя" classError={this.state.errorForename} valid={this.validForename}/>
-              <Input class="address" type="address" title="Address*" errorName="Некорректный адрес" classError={this.state.errorAddress} valid={this.validAddress}/>
-              <Input class="phone" type="number" title="Phone" errorName="Некорректный номер телефона" classError={this.state.errorPhone} valid={this.validPhone}/>
-              <Input class="email" type="email" title="E-mail" errorName="Некорректный емайл" classError={this.state.errorEmail} valid={this.validEmail}/>
-
-              <div className="form-group">
-                  <div className="name" >Shipping options</div>
-                  <div className="delivery">
-                      <select className="select">
-                          <option value="Free shipping" selected>Free shipping</option>
-                          <option value="Express shipping- additional 9.99 €">Express shipping- additional 9.99 €</option>
-                          <option value="Courier shipping - additional 19.99 €">Courier shipping - additional 19.99 €</option>
-                      </select>    
-                  </div>
-              </div>
-              <button className="btn" type="submit">PAY</button>
-              </form>
-          </div>
-        )
     }
+
+    const inputs = this.state.inputs.map(def => {
+      
+      if (def.cls === input.cls) {
+        if (errorMessage === null) {
+					def.value = value;
+          def.error = "";
+          def.classError = "";					
+        } else {
+          def.error = errorMessage;
+          def.classError = def.cls;
+          return def;
+        }
+      }
+      return def;
+    });
+
+    this.setState({ inputs });
+	}
+	
+	checkSum(){
+		if(this.state.sum >= 300){
+			return false;
+		}
+		return true;
+	}
+
+  render() {
+    return (
+      <div className="form">
+        <form className="form-shipping" action="" method="post">
+          {this.state.inputs.map(definition => {
+            return(
+            
+            <FormGroup
+              key={definition.id}
+              class={definition.cls}
+              type={definition.type}
+              title={definition.title}
+              errorName={definition.error}
+              classError={definition.classError}
+              onChange={value => this.updateValue(definition, value)}
+            />
+          )})}
+					<div className="form-group">
+						{ this.checkSum() ?
+							(
+								<>
+									<div className="name">Shipping options</div>
+									<div className="delivery">
+										<select className="select">
+											<option>
+												Free shipping
+											</option>
+											<option>
+												Express shipping- additional 9.99 €
+											</option>
+											<option>
+												Courier shipping - additional 19.99 €
+											</option>
+										</select>
+									</div>
+								</>
+							) : 
+							(
+								<>
+									<div className="name">Shipping options</div>
+									<input type="delivery" disabled="disabled" name="delivery" value="Free express shipping"></input>
+								</>
+							)
+						}
+					</div>
+          <button className="btn" type="submit">
+              PAY
+          </button>
+        </form>
+      </div>
+    );
+  }
 }
 
-export default Shipping
+export default Shipping;

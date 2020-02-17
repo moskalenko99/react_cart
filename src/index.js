@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-// import Shipping from './components/Shipping'
+// import App from './App';
+import Shipping from './components/form/Shipping'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Shipping />, document.getElementById('root'));
