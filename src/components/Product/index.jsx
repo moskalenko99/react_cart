@@ -31,8 +31,9 @@ class Product extends React.Component{
 
     render() {
         const { title, cost, description, image } = this.props.data;  
-        const { counter } = this.props;
+				const { counter } = this.props;
 				let price = (cost * counter).toFixed(2);
+				
         return(
             this.state.isValid  && (
                 <div className="single-good">
