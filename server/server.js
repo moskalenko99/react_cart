@@ -7,11 +7,11 @@ var cors = require('cors');
 var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
-	password: '',
+	password: 'password',
 	database: 'product',
 })
 
-connection.connect(function (error) { 
+connection.connect(function (error) {
 	if(!!error){
 		console.log('Error');
 	}else{
@@ -37,7 +37,7 @@ app.use(cors());
 // });
 
 app.get('/cart', function (req, res) {
-	connection.query("SELECT * FROM product", function (error, rows, fields) { 
+	connection.query("SELECT * FROM product", function (error, rows, fields) {
 		if(!!error){
 			console.log('Error in query');
 		}else{
@@ -57,7 +57,7 @@ app.get('/cart', function (req, res) {
 // 		res.json({
 // 			success: true
 // 		});
-// 	});    
+// 	});
 // });
 
 // app.post('/get-total-price', function (req, res) {
@@ -72,7 +72,7 @@ app.get('/cart', function (req, res) {
 
 app.use(express.static(__dirname));
 
-// connection.query("SELECT * FROM product", function (error, rows, fields) { 
+// connection.query("SELECT * FROM product", function (error, rows, fields) {
 // 	if(!!error){
 // 		console.log('Error in query');
 // 	}else{
