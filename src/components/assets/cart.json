@@ -4,20 +4,20 @@
       "title" : "1 Lorem ipsum dolor sit amet",
       "cost" : 12,
       "description" : "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "image" : "images/apple.png"
+      "image" : "https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg"
     },
     {
       "id" : "11294",
       "title" : "2 Lorem ipsum dolor sit amet",
       "cost" : 16,
       "description" : "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "image" : "images/lemon.png"
+      "image" : "https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg"
     },
     {
       "id" : "11295",
       "title" : "3 Lorem ipsum dolor sit amet",
       "cost" : 22,
       "description" : "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "image" : "images/strawberry.png"
+      "image" : "https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg"
     }
 ]

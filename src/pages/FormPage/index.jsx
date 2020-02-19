@@ -1,5 +1,6 @@
 import React from 'react';
-import FormGroup from './FormGroup';
+import FormGroup from './../../components/FormGroup';
+import './style.sass';
 
 const emptyValidator = value => {
   const valid = /[a-zA-Z]/.test(value);
@@ -24,7 +25,7 @@ const phoneValidator = phone => {
 
 class Shipping extends React.Component {
   state = {
-		sum: 32,
+		sum: 322,
     inputs: [
       {
         id: '1',
@@ -95,13 +96,6 @@ class Shipping extends React.Component {
 
     this.setState({ inputs });
 	}
-	
-	checkSum(){
-		if(this.state.sum >= 300){
-			return false;
-		}
-		return true;
-	}
 
   render() {
     return (
@@ -109,21 +103,21 @@ class Shipping extends React.Component {
         <form className="form-shipping" action="" method="post">
           {this.state.inputs.map(definition => {
             return(
-            
-            <FormGroup
-              key={definition.id}
-              class={definition.cls}
-              type={definition.type}
-              title={definition.title}
-              errorName={definition.error}
-              classError={definition.classError}
-              onChange={value => this.updateValue(definition, value)}
-            />
-          )})}
+							<FormGroup
+								key={definition.id}
+								class={definition.cls}
+								type={definition.type}
+								title={definition.title}
+								errorName={definition.error}
+								classError={definition.classError}
+								onChange={value => this.updateValue(definition, value)}
+							/>
+						)
+					})}
 					<div className="form-group">
-						{ this.checkSum() ?
+						{ this.props.sumPrice < 300 ?
 							(
-								<>
+								<React.Fragment>
 									<div className="name">Shipping options</div>
 									<div className="delivery">
 										<select className="select">
@@ -138,13 +132,13 @@ class Shipping extends React.Component {
 											</option>
 										</select>
 									</div>
-								</>
+								</React.Fragment>
 							) : 
 							(
-								<>
+								<React.Fragment>
 									<div className="name">Shipping options</div>
 									<input type="delivery" disabled="disabled" name="delivery" value="Free express shipping"></input>
-								</>
+								</React.Fragment>
 							)
 						}
 					</div>

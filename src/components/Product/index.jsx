@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/fontawesome-free-regular';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 class Product extends React.Component{
 
@@ -29,13 +32,12 @@ class Product extends React.Component{
     render() {
         const { title, cost, description, image } = this.props.data;  
         const { counter } = this.props;
-        let price = (cost * counter).toFixed(2);
-
+				let price = (cost * counter).toFixed(2);
         return(
             this.state.isValid  && (
                 <div className="single-good">
                     <div className="thumbnail">
-                        <img alt="img" src={image} />
+                        <img alt="img" src={image}/>
                     </div>            
                     <div className="text">
                         <h3 className="title">{title}</h3>
@@ -43,13 +45,15 @@ class Product extends React.Component{
                     </div>
                     <div className="calculation">
                         <div className="count">
-                            <div className="minus" onClick={this.handleDecrease}><i className="fas fa-minus"></i></div>
-                            <div className="count-product">{counter}</div>
-                            <div className="plus" onClick={this.handleIncrease}><i className="fas fa-plus"></i></div>
+														<FontAwesomeIcon className="minus" onClick={this.handleDecrease} icon={faMinus} />
+                            <div className="count-product">
+															{counter}
+														</div>
+														<FontAwesomeIcon className="plus" onClick={this.handleIncrease} icon={faPlus} />
                         </div>
                         <div className="price">{price}</div>
                     </div>
-                    <i className="remove-icon far fa-trash-alt" onClick={this.handleRemove}></i>
+										<FontAwesomeIcon className="remove-icon" icon={faTrashAlt}  onClick={this.handleRemove} />
                 </div>)
         )
     }

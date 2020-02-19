@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-// import App from './App';
-import Shipping from './components/form/Shipping'
+import App from './App';
+import FormPage from './pages/FormPage'
+import './style.sass';
 
-ReactDOM.render(<Shipping />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('app'));
